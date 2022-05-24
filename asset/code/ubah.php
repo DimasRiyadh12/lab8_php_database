@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL);
 include_once 'koneksi.php';
-
 if (isset($_POST['submit']))
 {
     $id = $_POST['id'];
@@ -22,7 +21,6 @@ if (isset($_POST['submit']))
             $gambar = 'gambar/' . $filename;;
         }
     }
-
     $sql = 'UPDATE data_barang SET ';
     $sql .= "nama = '{$nama}', kategori = '{$kategori}', ";
     $sql .= "harga_jual = '{$harga_jual}', harga_beli = '{$harga_beli}', stok = '{$stok}' ";
@@ -30,19 +28,18 @@ if (isset($_POST['submit']))
         $sql .= ", gambar = '{$gambar}' ";
     $sql .= "WHERE id_barang = '{$id}'";
     $result = mysqli_query($conn, $sql);
-
     header('location: index.php');
     }
 
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM data_barang WHERE id_barang = '{$id}'";
-    $result = mysqli_query($conn, $sql);
-    if (!$result) die('Error: Data tidak tersedia');
-    $data = mysqli_fetch_array($result);
-
-    function is_select($var, $val) {
-        if ($var == $val) return 'selected="selected"';
-        return false;
+$id = $_GET['id'];
+$sql = "SELECT * FROM data_barang WHERE id_barang = '{$id}'";
+$result = mysqli_query($conn, $sql);
+if (!$result) die('Error: Data tidak tersedia');
+$data = mysqli_fetch_array($result);
+function is_select($var, $val) 
+{
+    if ($var == $val) return 'selected="selected"';
+    return false;
 }
 ?>
 
@@ -65,9 +62,9 @@ if (isset($_POST['submit']))
           <div class="input">
             <label>Kategori</label>
             <select name="kategori" style="margin-left: 58px;">
-              <option <?php echo is_select ('Komputer', $data['kategori']);?> value="Komputer">Komputer</option>
-              <option <?php echo is_select ('Elektronik', $data['kategori']);?> value="Elektronik">Elektronik</option>
-              <option <?php echo is_select ('Hand Phone', $data['kategori']);?> value="Hand Phone">Hand Phone</option>
+              <option value="Komputer">Komputer</option>
+              <option value="Elektronik">Elektronik</option>
+              <option value="Hand Phone">Hand Phone</option>
             </select>
           </div>
           <div class="input">
